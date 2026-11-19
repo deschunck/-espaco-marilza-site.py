@@ -83,7 +83,8 @@ na aba **Horários**, marque os horários e salve. Só então o site terá o que
 | `origem` | `"site"` | `site` (cliente) ou `app` (profissional) |
 | `criadoEm` | `"2026-11-18T13:00:00.000Z"` | |
 
-**`servicos`**: `nome`, `descricao`, `preco`, `duracao` (minutos), `imagem` (URL da foto).
+**`servicos`**: `nome`, `descricao`, `preco`, `duracao` (minutos), `icone` (nome do ícone
+escolhido no app, da biblioteca Ionicons; exemplo: `"flower-outline"`).
 
 **`configuracoes/expediente`**: campo `horarios`, com os horários oferecidos em cada dia da
 semana (0 = domingo ... 6 = sábado). Exemplo: `{ "1": ["09:00", "10:00"], "2": [] }`.

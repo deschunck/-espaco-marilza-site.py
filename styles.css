@@ -338,10 +338,30 @@ button, input {
     box-shadow: var(--shadow);
 }
 
-.service-image {
+/* Área do ícone do serviço: fundo vinho liso, com o ícone rosa dentro de um anel fino */
+.service-icon {
     height: 205px;
-    background-size: cover;
-    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wine);
+}
+
+.service-icon ion-icon {
+    box-sizing: content-box;
+    padding: 26px;
+    border: 1px solid var(--rose);
+    border-radius: 50%;
+    color: var(--rose);
+    font-size: 52px; /* tamanho do ícone */
+    --ionicon-stroke-width: 20px;
+    transition: background .25s, color .25s;
+}
+
+/* Ao passar o mouse no cartão, as cores se invertem: anel rosa, ícone vinho */
+.service-card:hover .service-icon ion-icon {
+    background: var(--rose);
+    color: var(--wine);
 }
 
 .service-content {
@@ -864,7 +884,7 @@ button, input {
     color: #d1b28a;
 }
 
-.site-footer>p {
+.footer-info>p {
     font: italic 16px 'Cormorant Garamond',serif;
     color: #e2c9c4;
     margin: 17px 0;
@@ -1057,8 +1077,8 @@ button, input {
         grid-template-columns: 1fr;
     }
 
-    .service-image {
-        height: 220px;
+    .service-icon {
+        height: 190px;
     }
 
     .section-heading {
@@ -1431,4 +1451,75 @@ button, input {
 
 .success-step #trackBooking {
     margin-bottom: 12px;
+}
+
+/* ---------- Rodapé em duas colunas: informações à esquerda, mini mapa à direita ---------- */
+
+.footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+    margin-bottom: 30px;
+}
+
+.footer-info {
+    text-align: left;
+}
+
+.footer-info .footer-brand,
+.footer-info .footer-links {
+    justify-content: flex-start;
+}
+
+.footer-info .footer-links {
+    margin-bottom: 0;
+}
+
+.footer-map {
+    width: 340px;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.footer-map iframe {
+    display: block;
+    width: 100%;
+    height: 170px;
+    border: 1px solid rgba(255, 255, 255, .25);
+}
+
+.footer-map a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .7px;
+    color: #d1b28a;
+}
+
+.footer-map a:hover {
+    color: white;
+}
+
+/* No celular, o mapa desce para baixo das informações e tudo volta a ficar centralizado */
+@media (max-width: 800px) {
+    .footer-main {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+
+    .footer-info .footer-brand,
+    .footer-info .footer-links {
+        justify-content: center;
+    }
+
+    .footer-map {
+        width: min(100%, 340px);
+        text-align: center;
+    }
 }

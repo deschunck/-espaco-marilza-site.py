@@ -119,7 +119,7 @@ async function mostrarNovosHorarios(card) {
   const data = $("[data-nova-data]", card).value;
   const lista = $("[data-novos-horarios]", card);
   $("[data-salvar-reagendamento]", card).disabled = true;
-  card.dataset.novoHorario = "";
+  card.dataset.horarioEscolhido = "";
   if (!data) return (lista.innerHTML = "");
 
   lista.innerHTML = '<p class="empty-state">Carregando horários...</p>';
@@ -136,7 +136,7 @@ async function mostrarNovosHorarios(card) {
 
 async function salvarReagendamento(card) {
   const data = $("[data-nova-data]", card).value;
-  const horario = card.dataset.novoHorario;
+  const horario = card.dataset.horarioEscolhido;
   const botao = $("[data-salvar-reagendamento]", card);
   botao.disabled = true;
 
@@ -192,7 +192,10 @@ export function iniciarMeusAgendamentos() {
     const novoHorario = alvo("[data-novo-horario]");
     if (novoHorario) {
       $$("[data-novo-horario]", card).forEach(botao => botao.classList.toggle("selected", botao === novoHorario));
-      card.dataset.novoHorario = novoHorario.dataset.novoHorario;
+      // Guarda a escolha no cartão com outro nome ("horarioEscolhido"). Se usássemos
+      // "novoHorario", o cartão inteiro passaria a ter o atributo data-novo-horario
+      // e qualquer clique dentro dele seria confundido com a escolha de um horário.
+      card.dataset.horarioEscolhido = novoHorario.dataset.novoHorario;
       $("[data-salvar-reagendamento]", card).disabled = false;
       return;
     }

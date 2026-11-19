@@ -45,6 +45,13 @@ function preencherContato() {
   $("#footerWhatsapp").href = linkDoWhatsApp;
   $("#instagramLink").href = CONTATO.instagram || "#";
   $("#addressText").textContent = CONTATO.endereco;
+
+  // Mini mapa do rodapé. O endereço vai dentro do link, por isso precisa ser "codificado".
+  const enderecoNoLink = encodeURIComponent(CONTATO.enderecoNoMapa);
+  const linkDoMapa = `https://www.google.com/maps/search/?api=1&query=${enderecoNoLink}`;
+  $("#locationMap").src = `https://www.google.com/maps?q=${enderecoNoLink}&output=embed`;
+  $("#openInMaps").href = linkDoMapa; // abre o Google Maps em outra aba
+  $("#addressText").href = linkDoMapa;
   $("#year").textContent = new Date().getFullYear();
 }
 

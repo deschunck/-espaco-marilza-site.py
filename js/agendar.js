@@ -20,6 +20,9 @@ const escolha = {
   mes: primeiroDiaDoMes(new Date()) // mês mostrado no calendário
 };
 
+// Ícone mostrado quando o serviço ainda não tem um ícone escolhido no app.
+const ICONE_PADRAO = "sparkles-outline";
+
 let agendamentosDoMes = []; // usados para saber quais horários já estão ocupados
 let pararDeObservarMes = null;
 
@@ -39,7 +42,7 @@ export function renderizarServicos() {
     ? '<p class="empty-state">Em breve, novos procedimentos por aqui.</p>'
     : servicos.map(servico => `
       <article class="service-card">
-        <div class="service-image" ${servico.imagem ? `style="background-image:url('${escaparHtml(servico.imagem)}')"` : ""}></div>
+        <div class="service-icon"><ion-icon name="${escaparHtml(servico.icone || ICONE_PADRAO)}"></ion-icon></div>
         <div class="service-content">
           <h3>${escaparHtml(servico.nome)}</h3>
           <p>${escaparHtml(servico.descricao)}</p>

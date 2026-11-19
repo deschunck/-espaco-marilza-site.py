@@ -166,14 +166,25 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand"><span class="brand-mark">MC</span><div>Espaço <strong>Marilza Caricatti</strong><small>BELEZA & CUIDADO</small></div></div>
-    <p>Seu momento de beleza começa aqui.</p>
-    <div class="footer-links"><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><span id="addressText">Endereço a configurar</span></div>
+    <div class="footer-main">
+      <div class="footer-info">
+        <div class="footer-brand"><span class="brand-mark">MC</span><div>Espaço <strong>Marilza Caricatti</strong><small>BELEZA & CUIDADO</small></div></div>
+        <p>Seu momento de beleza começa aqui.</p>
+        <div class="footer-links"><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><a id="addressText" href="#" target="_blank" rel="noopener">Endereço a configurar</a></div>
+      </div>
+      <!-- Mini mapa: o endereço é preenchido pelo js/principal.js, a partir do js/configuracao.js -->
+      <div class="footer-map">
+        <iframe id="locationMap" title="Mapa com a localização do Espaço Marilza Caricatti" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a id="openInMaps" href="#" target="_blank" rel="noopener">Abrir no Google Maps ↗</a>
+      </div>
+    </div>
     <small class="copyright">© <span id="year"></span> Espaço Marilza Caricatti. Todos os direitos reservados.</small>
   </footer>
 
 <a class="floating-whatsapp" id="floatingWhatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Fale pelo WhatsApp">✆</a>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- Ionicons: desenha os ícones dos serviços (os mesmos usados no app) -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
   <script type="module" src="js/principal.js"></script>
 </body>
 </html>
