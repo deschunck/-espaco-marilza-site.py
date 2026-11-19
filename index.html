@@ -28,6 +28,12 @@
   </header>
 
   <main>
+    <!-- Aparece só enquanto o Firebase não foi configurado (js/firebase-config.js) -->
+    <div class="setup-notice" id="setupNotice" hidden>
+      <strong>Falta configurar o Firebase.</strong>
+      Abra o arquivo <code>js/firebase-config.js</code> e cole os dados do seu projeto. O passo a passo está no README.
+    </div>
+
     <section class="hero" id="inicio">
       <div class="hero-copy">
         <p class="eyebrow">UM TEMPO SÓ SEU</p>
@@ -93,7 +99,7 @@
           <section class="booking-step" data-step="3">
             <p class="form-kicker">SUA AGENDA</p>
             <h3>Escolha o melhor dia e horário.</h3>
-            <p class="muted">As opções abaixo são atualizadas conforme os horários reservados.</p>
+            <p class="muted"><span class="live-dot"></span> Horários atualizados em tempo real.</p>
             <div class="calendar-layout">
               <div class="calendar">
                 <div class="calendar-top"><button type="button" id="prevMonth" aria-label="Mês anterior">‹</button><strong id="monthLabel"></strong><button type="button" id="nextMonth" aria-label="Próximo mês">›</button></div>
@@ -115,15 +121,16 @@
             <h3>Confira os detalhes da sua reserva.</h3>
             <p class="muted">Veja se está tudo certinho antes de confirmar.</p>
             <div class="summary" id="bookingSummary"></div>
-            <div class="form-actions"><button type="button" class="button button-ghost" data-prev>← Voltar</button><button type="submit" class="button button-primary" id="confirmButton">Confirmar agendamento <span>♡</span></button></div>
+            <div class="form-actions"><button type="button" class="button button-ghost" data-prev>← Voltar</button><button type="submit" class="button button-primary" id="confirmButton">Solicitar agendamento <span>♡</span></button></div>
           </section>
 
           <section class="booking-step success-step" data-step="5">
             <div class="success-icon">✓</div>
-            <p class="eyebrow">RESERVA REALIZADA</p>
-            <h3>Agendamento realizado com sucesso!</h3>
-            <p class="muted">Seu momento de beleza está reservado. Será um prazer receber você no Espaço Marilza Caricatti!</p>
+            <p class="eyebrow">PEDIDO ENVIADO</p>
+            <h3>Recebemos o seu pedido de agendamento!</h3>
+            <p class="muted">Seu horário está reservado e aguarda a confirmação da Marilza. Você receberá uma mensagem no WhatsApp assim que ele for confirmado.</p>
             <div class="summary" id="successSummary"></div>
+            <button type="button" class="button button-primary" id="trackBooking">Acompanhar meu agendamento <span>→</span></button>
             <a class="button button-whatsapp" id="whatsappLink" href="#" target="_blank" rel="noopener">Conversar pelo WhatsApp ↗</a>
             <button type="button" class="text-button" id="newBooking">Voltar ao início</button>
           </section>
@@ -139,7 +146,7 @@
         </div>
       </div>
       <div class="my-bookings-card">
-        <p class="muted">Consulte seus horários reservados informando o telefone utilizado no momento do agendamento.</p>
+        <p class="muted">Informe o telefone usado no agendamento para acompanhar seus horários. O status é atualizado na hora quando a Marilza confirma.</p>
         <form id="lookupForm" novalidate>
           <div class="field">
             <label for="lookupPhone">Número de telefone / WhatsApp com DDD *</label>
@@ -159,23 +166,25 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand"><span class="brand-mark">MC</span><div>Espaço <strong>Marilza Caricatti</strong><small>BELEZA & CUIDADO</small></div></div>
-    <p>Seu momento de beleza começa aqui.</p>
-    <div class="footer-links"><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><span id="addressText">Endereço a configurar</span></div>
+    <div class="footer-main">
+      <div class="footer-info">
+        <div class="footer-brand"><span class="brand-mark">MC</span><div>Espaço <strong>Marilza Caricatti</strong><small>BELEZA & CUIDADO</small></div></div>
+        <p>Seu momento de beleza começa aqui.</p>
+        <div class="footer-links"><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="footerWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><a id="addressText" href="#" target="_blank" rel="noopener">Endereço a configurar</a></div>
+      </div>
+      <!-- Mini mapa: o endereço é preenchido pelo js/principal.js, a partir do js/configuracao.js -->
+      <div class="footer-map">
+        <iframe id="locationMap" title="Mapa com a localização do Espaço Marilza Caricatti" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a id="openInMaps" href="#" target="_blank" rel="noopener">Abrir no Google Maps ↗</a>
+      </div>
+    </div>
     <small class="copyright">© <span id="year"></span> Espaço Marilza Caricatti. Todos os direitos reservados.</small>
   </footer>
 
-<a
-  class="floating-whatsapp"
-  id="floatingWhatsapp"
-  href="https://wa.me/37998234527?text=Ol%C3%A1%21%20Acabei%20de%20realizar%20um%20agendamento%20pelo%20site%20do%20Espa%C3%A7o%20Marilza%20Caricatti%20e%20gostaria%20de%20confirmar%20o%20recebimento.%20Poderiam%2C%20por%20gentileza%2C%20verificar%20para%20mim%3F%20Obrigada!"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Fale pelo WhatsApp"
->
-  ✆
-</a>
+<a class="floating-whatsapp" id="floatingWhatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Fale pelo WhatsApp">✆</a>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js"></script>
+  <!-- Ionicons: desenha os ícones dos serviços (os mesmos usados no app) -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script type="module" src="js/principal.js"></script>
 </body>
 </html>

@@ -1,0 +1,46 @@
+// REGRAS DE SEGURANÇA DO FIRESTORE
+//
+// Como usar: Console do Firebase > Firestore Database > aba "Regras",
+// apague o que estiver lá, cole este arquivo inteiro e clique em "Publicar".
+//
+// Quem é quem:
+//   - cliente (site): não faz login. Pode ver serviços e horários e pedir um agendamento.
+//   - profissional (app): faz login com e-mail e senha. Pode fazer tudo.
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logada() {
+      return request.auth != null;
+    }
+
+    // Serviços e horários disponíveis: todos leem, só a profissional altera.
+    match /servicos/{id} {
+      allow read: if true;
+      allow write: if logada();
+    }
+
+    match /configuracoes/{id} {
+      allow read: if true;
+      allow write: if logada();
+    }
+
+    match /agendamentos/{id} {
+      // O site precisa ler para saber quais horários estão ocupados
+      // e para a cliente consultar os próprios agendamentos.
+      allow read: if true;
+
+      // A cliente só pode criar um pedido "pendente" vindo do site.
+      allow create: if logada()
+        || (request.resource.data.status == 'pendente' && request.resource.data.origem == 'site');
+
+      // A cliente pode cancelar ou reagendar (o pedido volta a ficar pendente),
+      // mas nunca confirmar: confirmar é só pelo app.
+      allow update: if logada()
+        || request.resource.data.status in ['pendente', 'cancelado'];
+
+      allow delete: if logada();
+    }
+  }
+}
