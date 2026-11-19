@@ -1382,3 +1382,53 @@ button, input {
     }
 
 }
+
+
+/* ---------- Integração com o Firebase ---------- */
+
+/* Status "aguardando confirmação" (os outros dois já existem acima) */
+.appointment-status.is-pending {
+    background: #f6eedd;
+    color: #8a6a2f;
+}
+
+/* Bolinha que pulsa: indica dados em tempo real */
+.live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: #4fa583;
+    animation: pulsar 1.6s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(79, 165, 131, .5); }
+    50% { box-shadow: 0 0 0 6px rgba(79, 165, 131, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+}
+
+/* Aviso mostrado enquanto o Firebase não foi configurado */
+.setup-notice {
+    margin: 0;
+    padding: 14px 20px;
+    background: #f6eedd;
+    color: var(--brown);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.setup-notice code {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(73, 53, 47, .08);
+}
+
+.success-step #trackBooking {
+    margin-bottom: 12px;
+}
