@@ -64,15 +64,10 @@ button, input {
     gap: 12px;
 }
 
-.brand-mark {
-    width: 43px;
-    height: 43px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: var(--wine);
-    font: 600 19px 'Cormorant Garamond',serif;
+/* Logo do espaço (img/logo.png no cabeçalho, img/logo-clara.png no rodapé) */
+.brand-logo {
+    height: 54px;
+    width: auto;
 }
 
 .brand-name, .footer-brand>div {
@@ -872,8 +867,8 @@ button, input {
     text-align: left;
 }
 
-.footer-brand .brand-mark {
-    color: #f8eee9;
+.footer-brand .brand-logo {
+    height: 62px;
 }
 
 .footer-brand strong {
